@@ -15,7 +15,7 @@ const fetchPageRoutes = async (pagesStore) => {
     }))
 
     return {
-      path: entry.url,
+      path: entry.url, // Use the page URL (slug) for routing
       name: entry.title || entry.uid,
       component: PageView,
       props: {
@@ -27,23 +27,26 @@ const fetchPageRoutes = async (pagesStore) => {
   })
 }
 
+// Add a fallback for the root page (`/`)
 const initializeRouter = async (pagesStore) => {
   const routes = await fetchPageRoutes(pagesStore)
 
+  // Add a route for the root page if necessary
   routes.push({
     path: '/',
-    name: 'Home',
+    name: 'Home', // Or any name for your root page
     component: PageView,
   })
 
   const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes, // Dynamically generated routes
   })
 
   return router
 }
 
+// Export an async function to initialize the router and store
 export const initializeAppRouter = async (pagesStore) => {
   const router = await initializeRouter(pagesStore)
   return router

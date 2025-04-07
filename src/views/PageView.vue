@@ -1,38 +1,30 @@
 <template>
   <div>
-    <h1>{{ pageTitle }}</h1>
-    <DocumentList />
+    <div v-for="(option, index) in pageOptions" :key="index">
+      <HeroBanner v-if="option.hero_banner" :content="option.hero_banner" />
+      <DocumentList v-if="option.document_list" :documents="option.document_list" />
+    </div>
   </div>
 </template>
 
 <script setup>
+import { onMounted, computed, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { usePagesStore } from '@/stores/pagesStore'
+import HeroBanner from '@/components/HeroBanner.vue'
 import DocumentList from '@/components/DocumentList.vue'
 
-import { usePagesStore } from '@/stores/pagesStore'
-import { onMounted, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
-
-const pagesStore = usePagesStore()
 const route = useRoute()
-
-const currentPage = computed(() => {
-  return pagesStore.pages.find((page) => page.url.toLowerCase() === route.path.toLowerCase())
-})
-
-const pageTitle = computed(() => currentPage.value?.title || 'Loading...')
-
-onMounted(async () => {
-  if (pagesStore.pages.length === 0) {
-    await pagesStore.fetchPages()
-  }
-})
+const slug = ref(route.params.slug)
 
 watch(
-  () => route.path,
-  async () => {
-    if (pagesStore.pages.length === 0) {
-      await pagesStore.fetchPages()
-    }
+  () => route.params.slug,
+  (newSlug) => {
+    slug.value = newSlug
   },
 )
+
+const pagesStore = usePagesStore()
+
+const pageOptions = computed(() => pagesStore.getPageOptionsBySlug(slug.value))
 </script>

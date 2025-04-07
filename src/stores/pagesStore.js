@@ -1,10 +1,10 @@
-// src/stores/pages.js
 import { defineStore } from 'pinia'
 
 export const usePagesStore = defineStore('pages', {
   state: () => ({
     pages: [],
   }),
+
   actions: {
     async fetchPages() {
       const response = await fetch(
@@ -17,8 +17,20 @@ export const usePagesStore = defineStore('pages', {
           },
         },
       )
+
       const data = await response.json()
+      console.log('Fetched pages:', data.entries)
       this.pages = data.entries
+    },
+  },
+
+  getters: {
+    getPageOptionsBySlug: (state) => (slug) => {
+      const page = state.pages.find((p) => p.slug === slug)
+      return page ? page.page_options || [] : []
+    },
+    getPageBySlug: (state) => (slug) => {
+      return state.pages.find((p) => p.slug === slug)
     },
   },
 })

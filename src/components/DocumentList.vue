@@ -1,13 +1,9 @@
 <template>
-  <div>
-    <h2>Documents</h2>
-    <ul v-if="documentList.length > 0">
-      <li v-for="(document, index) in documentList" :key="index">
-        <a :href="document.url" target="_blank">{{ document.title }}</a>
-      </li>
-    </ul>
-    <p v-else>No documents available.</p>
-  </div>
+  <ul v-if="documentList.length > 0">
+    <li v-for="(document, index) in documentList" :key="index">
+      <a :href="document.url" target="_blank" rel="noopener noreferrer">{{ document.title }}</a>
+    </li>
+  </ul>
 </template>
 
 <script setup>
