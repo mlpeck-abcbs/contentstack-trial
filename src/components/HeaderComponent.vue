@@ -30,3 +30,13 @@ watch(
   { immediate: true },
 )
 </script>
+
+<style scoped>
+header {
+  padding: 1rem;
+
+  img {
+    max-width: 400px;
+  }
+}
+</style>
