@@ -23,7 +23,6 @@ const currentPage = computed(() =>
 )
 
 const documentList = computed(() => {
-  // Check if document_list exists and if it's an object with a 'file' array inside
   const list = currentPage.value?.document_list?.file
   return Array.isArray(list) ? list : []
 })
