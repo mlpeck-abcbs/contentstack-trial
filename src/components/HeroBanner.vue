@@ -1,7 +1,8 @@
 <template>
   <div v-if="bannerContent && bannerImg" class="hero-banner">
-    <img :src="bannerImg.url" :alt="bannerImg.title" class="hero-banner-img" />
-    <div class="hero-banner-content" v-html="bannerContent"></div>
+    <div class="inner">
+      <div class="hero-banner-content" v-html="bannerContent"></div>
+    </div>
   </div>
 </template>
 
@@ -39,7 +40,8 @@ const bannerImg = computed(() => {
   position: relative;
   width: 100%;
   height: 300px;
-  background-color: #f0f0f0;
+
+  background: #2372b3;
 }
 
 .hero-banner-img {
@@ -48,11 +50,20 @@ const bannerImg = computed(() => {
   object-fit: cover;
 }
 
+.hero-banner .inner {
+  max-width: 1440px;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  font-size: 2rem;
+  font-weight: 700;
+}
+
 .hero-banner-content {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: white;
-  font-size: 24px;
 }
 </style>

@@ -40,6 +40,8 @@ watch(
 footer {
   padding: 1rem;
 
+  background: #999;
+
   img {
     max-width: 400px;
   }

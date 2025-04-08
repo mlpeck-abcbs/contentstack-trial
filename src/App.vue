@@ -22,7 +22,7 @@ const taxonomy = ref({ uid: 'abcbs', name: 'lob' })
 }
 
 .bc--white {
-  background: #fff;
+  background: #daa595;
 }
 
 body,
@@ -31,6 +31,8 @@ html {
 
   padding: 0;
   margin: 0;
+
+  font-family: 'Courier New', Courier, monospace;
 }
 
 #app {
